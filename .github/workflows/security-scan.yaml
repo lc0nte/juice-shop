@@ -54,7 +54,7 @@ jobs:
             --error || true
 
     - name: subir results a tab de sec y quality
-      uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: results.sarif
           category: semgrep
