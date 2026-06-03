@@ -31,3 +31,24 @@ jobs:
 
     - name: Analisis SCA
       run: npm audit
+
+  static_scan:
+    needs: secret_scanning
+    if: always()
+    name: SAST scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout descargar codigo
+      uses: actions/checkout@v6
+
+    - name: ejecutar semgrep
+      run: |
+          docker run --rm \
+            -v "$PWD:/src" \
+            -w /src \
+            semgrep/semgrep \
+            semgrep scan \
+            --config p/default \
+            --sarif \
+            --output semgrep.sarif \
+            --error || true
