@@ -17,3 +17,16 @@ jobs:
 
     - name: Gitleaks
       uses: gitleaks/gitleaks-action@v3.0.0
+
+  dependency_scan:
+    name: SCA Scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout descargar codigo
+      uses: actions/checkout@v6
+
+    - name: Instalar dependencias
+      run: npm install
+
+    - name: Analisis SCA
+      run: npm audit
